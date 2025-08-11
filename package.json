@@ -10,7 +10,7 @@
     "copy:files": "npm run copy:html && npm run copy:assets && npm run copy:animations",
     "copy:html": "copyfiles -u 1 \"src/**/*.html\" dist/",
     "copy:assets": "copyfiles -u 1 \"img/**/*\" dist/img/ && copyfiles -u 1 \"video/**/*\" dist/video/",
-    "copy:animations": "copyfiles -u 1 \"src/Animations/**/*\" dist/Animations/",
+    "copy:animations": "copyfiles -u 2 \"src/Animations/**/*\" dist/Animations/",
     "copy:assets:dev": "copyfiles -u 1 \"img/**/*\" dist/img/ && copyfiles -u 1 \"video/**/*\" dist/video/ --watch",
     "clean": "rimraf dist",
     "start": "npm run build && serve dist",
