@@ -9,8 +9,106 @@
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <title>GLOBE TREKKER</title>
   <style>
+    /* Theme Variables */
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+      --accent-color: #ff6b00;
+      --nav-bg: #ffffff;
+      --card-bg: #ffffff;
+      --border-color: #e5e7eb;
+      --shadow-color: rgba(0, 0, 0, 0.1);
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #111827;
+      --bg-secondary: #1f2937;
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --accent-color: #ff6b00;
+      --nav-bg: #1f2937;
+      --card-bg: #1f2937;
+      --border-color: #374151;
+      --shadow-color: rgba(0, 0, 0, 0.3);
+    }
+
+    /* Base Styles */
     html {
       scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Theme Toggle Styles */
+    #theme-toggle {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      z-index: 50;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 9999px;
+      background-color: var(--nav-bg);
+      border: 2px solid var(--border-color);
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px var(--shadow-color);
+    }
+
+    #theme-toggle:hover {
+      transform: scale(1.1);
+      border-color: var(--accent-color);
+      box-shadow: 0 0 15px var(--accent-color);
+    }
+
+    #theme-toggle svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      transition: transform 0.3s ease;
+    }
+
+    #theme-toggle:hover svg {
+      transform: rotate(360deg);
+    }
+
+    /* Theme Transition Animation */
+    .theme-transition {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 40;
+      background: radial-gradient(circle at var(--x) var(--y), var(--bg-primary) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .theme-transition.active {
+      opacity: 1;
+    }
+
+    /* Enhanced Base Styles */
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+    }
+
+    .nav {
+      background-color: var(--nav-bg);
+      border-bottom: 1px solid var(--border-color);
     }
 
     @keyframes fade-in {
@@ -169,6 +267,15 @@
 
   <!-- ======================== 🔷 NAVBAR ======================== -->
   <nav class="relative container mx-auto p-6 opacity-0 animate-fadeIn">
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" aria-label="Toggle Theme">
+      <svg id="theme-toggle-dark-icon" class="hidden" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+      </svg>
+      <svg id="theme-toggle-light-icon" class="hidden" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"></path>
+      </svg>
+    </button>
     <div class="flex items-center justify-between">
 
       <!-- 🟠 Logo with animation -->
@@ -1372,6 +1479,12 @@
   
   <!---Animations-->
   <script src="/Animations/Animate.js"></script>
+  
+  <!-- Theme Transition Overlay -->
+  <div class="theme-transition"></div>
+
+  <!-- Theme Manager -->
+  <script src="/Animations/theme.js"></script>
 
 </body>
 
