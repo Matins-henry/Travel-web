@@ -1,0 +1,28 @@
+{
+  "name": "travel-web",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm run clean && concurrently \"npm run watch:css\" \"npm run copy:assets:dev\"",
+    "build": "npm run clean && npm run build:css && npm run copy:files",
+    "build:css": "tailwindcss -i ./src/input.css -o ./dist/css/output.css",
+    "watch:css": "tailwindcss -i ./src/input.css -o ./dist/css/output.css --watch",
+    "copy:files": "npm run copy:html && npm run copy:assets && npm run copy:animations",
+    "copy:html": "copyfiles -u 1 \"src/**/*.html\" dist/",
+    "copy:assets": "copyfiles -u 1 \"img/**/*\" dist/img/ && copyfiles -u 1 \"video/**/*\" dist/video/",
+    "copy:animations": "copyfiles -u 1 \"src/Animations/**/*\" dist/Animations/",
+    "copy:assets:dev": "copyfiles -u 1 \"img/**/*\" dist/img/ && copyfiles -u 1 \"video/**/*\" dist/video/ --watch",
+    "clean": "rimraf dist",
+    "start": "npm run build && serve dist",
+    "serve": "serve dist"
+  },
+  "dependencies": {
+    "tailwindcss": "^3.3.0",
+    "copyfiles": "^2.4.1",
+    "rimraf": "^5.0.1",
+    "serve": "^14.2.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}

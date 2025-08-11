@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .menu-item-hover {
+    @apply transition-all duration-300;
+  }
+  
+  .menu-item-hover:hover {
+    @apply transform translate-x-2 bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
