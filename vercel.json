@@ -11,6 +11,27 @@
   ],
   "routes": [
     {
+      "src": "/css/(.*)",
+      "dest": "/css/$1"
+    },
+    {
+      "src": "/img/(.*)",
+      "dest": "/img/$1"
+    },
+    {
+      "src": "/video/(.*)",
+      "dest": "/video/$1"
+    },
+    {
+      "src": "/Animations/(.*)",
+      "dest": "/Animations/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1",
+      "continue": true
+    },
+    {
       "src": "/(.*)",
       "dest": "/index.html"
     }
