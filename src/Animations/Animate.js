@@ -19,6 +19,52 @@ document.addEventListener('DOMContentLoaded', function() {
     navbar.classList.add('opacity-100');
   }, 100);
 
+  // Intersection Observer to add staggered reveals
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('inview');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.stagger').forEach((container) => {
+    // set CSS variable indexes for delay
+    Array.from(container.children).forEach((child, idx) => {
+      child.style.setProperty('--i', idx);
+    });
+    observer.observe(container);
+  });
+
+  // Theme toggle
+  const toggle = document.getElementById('theme-toggle');
+  if (toggle) {
+    const applyTheme = (mode) => {
+      if (mode === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    };
+
+    toggle.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.contains('dark');
+      const next = isDark ? 'light' : 'dark';
+      localStorage.setItem('theme', next);
+      applyTheme(next);
+    });
+
+    // Listen to system changes only when user hasn't chosen explicitly
+    const stored = localStorage.getItem('theme');
+    if (!stored) {
+      const media = window.matchMedia('(prefers-color-scheme: dark)');
+      media.addEventListener('change', (e) => {
+        applyTheme(e.matches ? 'dark' : 'light');
+      });
+    }
+  }
+
 });
 
  class MobileMenu {

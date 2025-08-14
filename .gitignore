@@ -1,3 +1,10 @@
+node_modules/
+dist/
+.DS_Store
+Thumbs.db
+npm-debug.log*
+yarn-error.log
+package-lock.json
 # Dependencies
 node_modules/
 npm-debug.log*
